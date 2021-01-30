@@ -10,24 +10,28 @@
 	<body>
 		<script src="js/three.js"></script>
 		<script>
-            // Our Javascript will go here.
+           
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+            const camera = new THREE.PerspectiveCamera( 
+                75,                                         //The distance of the object (we see it far away or close)
+                window.innerWidth / window.innerHeight,     //Element divided by the width and height of window
+                0.1,                                        //It wont be rendered futher or closer to these points
+                1000 );
 
-            const renderer = new THREE.WebGLRenderer();
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            document.body.appendChild( renderer.domElement );
+            const renderer = new THREE.WebGLRenderer();                             //Instance of the render
+            renderer.setSize( window.innerWidth/2, window.innerHeight/2, false );   //The size at which we want ot render our app. Here is filling up the whole window, if we put "window.Innerwidth/2" render at half size.
+            document.body.appendChild( renderer.domElement );                       //Add a <canvas> element to the DOM
 
-            const geometry = new THREE.BoxGeometry();
-            const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-            const cube = new THREE.Mesh( geometry, material );
-            scene.add( cube );
+            const geometry = new THREE.BoxGeometry();                               //Intance the type of the geometry
+            const material = new THREE.MeshBasicMaterial( { color: 0x6a5acd } );    //Instance of the geometry material
+            const cube = new THREE.Mesh( geometry, material );                      //Apply the material to the object
+            scene.add( cube );                                                      //Cube is added in the coordinates (0,0,0)
 
-            camera.position.z = 5;
+            camera.position.z = 5;                                                  //We see the object farther or closer 
 
-            function animate() {
-                requestAnimationFrame( animate );
-                cube.rotation.x += 0.01;
+            function animate() {                        // This is a loop
+                requestAnimationFrame( animate );       //This render the scene and draw it every time in the screen (60times per second). Pauses when the user navigates to another browser tab.
+                cube.rotation.x += 0.01;                //These lines is to rotate the object, here you add what you want to change
                 cube.rotation.y += 0.01;
                 renderer.render( scene, camera );
             }

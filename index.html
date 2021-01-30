@@ -5,45 +5,47 @@
 		<title>My first three.js app</title>
 		<style>
 			body { margin: 0; }
-			canvas { display: block }
+			canvas { display: block } /*This element is created by the script*/
 		</style>
 	</head>
 	<body>
 		<script src="./js/three.js"></script>
 		<script type="module" src="./js/GLTFLoader.js"></script>
 		<script type="module">
-		  import { GLTFLoader } from "./js/GLTFLoader.js";
-	
-		  var scene = new THREE.Scene();
-	
-		  var camera = new THREE.PerspectiveCamera(
+
+		import { GLTFLoader } from "./js/GLTFLoader.js";
+
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(
 			75,
 			window.innerWidth / window.innerHeight,
 			0.01,
 			1000
-		  );
-		  var renderer = new THREE.WebGLRenderer();
-		  renderer.setSize(window.innerWidth, window.innerHeight);
-		  document.body.appendChild(renderer.domElement);
-	
-		  var loader = new GLTFLoader();
-	
-		  var obj;
-		  loader.load("scene.gltf", function (gltf) {
+		);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		const loader = new GLTFLoader();
+		const obj;
+		loader.load("scene.gltf", function (gltf) {
 			obj = gltf.scene;
 			scene.add(gltf.scene);
-		  });
-		  scene.background = new THREE.Color(0xffffff);
-		  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 10);
-		  scene.add(light);
-		  camera.position.set(0, 10, 40);
-		  
-		  function animate() {
+			scene.background = new THREE.Color(0xffffff);
+			var light = new THREE.HemisphereLight(0xffffff, 0x000000, 10);
+			scene.add(light);
+			camera.position.set(0, 10, 40);
+
+			animate()
+		});
+
+		function animate() {
 			requestAnimationFrame(animate);
-			// obj.rotation.y += 0.01;
+			obj.rotation.y += 0.01;
 			renderer.render(scene, camera);
-		  }
-		  animate();
+		}
+	  
 		</script>
 	</body>
 </html>
